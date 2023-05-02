@@ -12,12 +12,12 @@ export default function App() {
       setIsLoading(true)
 
       try {
-        await axios.get('http://localhost:2015/restaurant').then(response => {
+        await axios.get(import.meta.env.VITE_API_URL + '/restaurant').then(response => {
           setRestaurants(response.data)
         })
 
       } catch (error) {
-        setError(error.message)
+        setError(error?.response?.data || 'Erro ao buscar restaurantes')
       } finally {
         setIsLoading(false)
       }
